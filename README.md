@@ -2,7 +2,6 @@
 If `uv` is not installed, install it. <br>
 https://docs.astral.sh/uv/ <br>
 ```
-# install uv and python if not installed
 curl -LsSf https://astral.sh/uv/install.sh | sh
 uv python install
 ```
@@ -16,3 +15,14 @@ make install
 `.venv` python virtual environment <br>
 `exp` experimental folders <br>
 `ref` referential materials <br>
+`shared` folder you symlink to your projects <br>
+
+### Symlink shared folder
+```
+ln ../../shared -s
+```
+
+### General library usage
+`pyyaml` to store configs <br>
+`pandas` to store training run info <br>
+`tensorboard` to visualize training runs <br>

@@ -1,0 +1,4 @@
+# timm model
+model: resnet18
+model_pretrained: true
+model_input: [3, 224, 224]

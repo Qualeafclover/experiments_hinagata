@@ -1,0 +1,8 @@
+# torchvision dataset
+dataset: CIFAR10
+dataset_train_kwargs:
+  train: true
+  download: true
+dataset_test_kwargs:
+  train: false
+  download: true
