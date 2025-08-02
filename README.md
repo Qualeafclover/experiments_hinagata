@@ -24,5 +24,4 @@ ln ../../shared -s
 
 ### General library usage
 `pyyaml` to store configs <br>
-`pandas` to store training run info <br>
 `tensorboard` to visualize training runs <br>

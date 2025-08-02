@@ -163,3 +163,4 @@ cython_debug/
 *.out
 .trash
 uv.lock
+runs/*

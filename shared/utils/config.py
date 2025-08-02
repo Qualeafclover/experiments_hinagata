@@ -1,5 +1,6 @@
 import yaml
 import math
+import logging
 
 yaml.add_constructor(
     '!product', 
@@ -8,6 +9,9 @@ yaml.add_constructor(
 )
 
 class ConfigDict(dict):
+    
+    logger = logging.getLogger(__name__)
+
     def __getattr__(self, key):
         if key in self:
             return self[key]
@@ -37,14 +41,16 @@ class ConfigDict(dict):
         return out
 
     @classmethod
-    def from_yaml(cls, *paths):
-        # with open(path, "r") as f:
-        #     out = NamedDict.from_dict(yaml.safe_load(f))
-        # TODO
+    def from_yaml(cls, *paths, warn_overwrite=True):
         out = cls()
         for path in paths:
             with open(path, "r") as f:
-                out.update(ConfigDict.from_dict(yaml.safe_load(f)))
+                partial_out = cls.from_dict(yaml.safe_load(f))
+            if warn_overwrite:
+                for key in partial_out.keys():
+                    if key in out.keys():
+                        cls.logger.warning(f"Found duplicate keys, overwriting '{out[key]}' with '{partial_out[key]}' from '{path}'")
+            out.update(partial_out)
         return out
 
     def to_yaml(self, path):
