@@ -1,6 +1,13 @@
 import yaml
+import math
 
-class NamedDict(dict):
+yaml.add_constructor(
+    '!product', 
+    lambda loader, node: math.prod(loader.construct_sequence(node)), 
+    Loader=yaml.SafeLoader,
+)
+
+class ConfigDict(dict):
     def __getattr__(self, key):
         if key in self:
             return self[key]
@@ -13,7 +20,7 @@ class NamedDict(dict):
     def to_dict(self):
         out = {}
         for k, v in self.items():
-            if isinstance(v, NamedDict):
+            if isinstance(v, ConfigDict):
                 out[k] = v.to_dict()
             else:
                 out[k] = v
@@ -37,7 +44,7 @@ class NamedDict(dict):
         out = cls()
         for path in paths:
             with open(path, "r") as f:
-                out.update(NamedDict.from_dict(yaml.safe_load(f)))
+                out.update(ConfigDict.from_dict(yaml.safe_load(f)))
         return out
 
     def to_yaml(self, path):
