@@ -1,3 +1,4 @@
 *.trash
 *.venv
 .python-version
+uv.lock
