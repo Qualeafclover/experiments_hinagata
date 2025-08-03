@@ -1,8 +1,4 @@
-# torchvision dataset
-dataset: CIFAR10
-dataset_train_kwargs:
-  train: true
-  download: true
-dataset_test_kwargs:
-  train: false
-  download: true
+# webdataset on huggingface
+# refer to: shared/utils/get_dataset.py
+dataset: webdataset_cifar10
+dataset_kwargs: {}

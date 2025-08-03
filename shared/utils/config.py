@@ -8,7 +8,7 @@ yaml.add_constructor(
     Loader=yaml.SafeLoader,
 )
 
-class ConfigDict(dict):
+class NamedDict(dict):
     
     logger = logging.getLogger(__name__)
 
@@ -24,7 +24,7 @@ class ConfigDict(dict):
     def to_dict(self):
         out = {}
         for k, v in self.items():
-            if isinstance(v, ConfigDict):
+            if isinstance(v, NamedDict):
                 out[k] = v.to_dict()
             else:
                 out[k] = v
