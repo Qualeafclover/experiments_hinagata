@@ -144,7 +144,7 @@ def main():
         model_state = model.state_dict()
         torch.save(model_state, checkpoint_dir / "last_weight.pt")
         if args.save_freq > 0 and (epoch_num + 1) % args.save_freq == 0:
-            torch.save(model_state, checkpoint_dir / f"model_epoch_{epoch_num+1}.pth")
+            torch.save(model_state, checkpoint_dir / f"model_epoch_{epoch_num+1}.pt")
             logging.info(f"Model saved at epoch {epoch_num+1}")
         writer.add_scalars(metrics, global_step=epoch_num+1)
     writer.flush()
